@@ -5,7 +5,7 @@ import '../css/common.css';
 
 const date = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
-const deysEl = document.querySelector('[data-days]');
+const daysEl = document.querySelector('[data-days]');
 const hoursEl = document.querySelector('[data-hours]');
 const minutesEl = document.querySelector('[data-minutes]');
 const secondsEl = document.querySelector('[data-seconds]');
@@ -41,10 +41,10 @@ function onStartBtn() {
         const timeToEnd = selectData - Date.now();
         const { days, hours, minutes, seconds } = convertMs(timeToEnd);
 
-        days.textContent = addLeadingZero(days);
-        hours.textContent = addLeadingZero(hours);
-        minutes.textContent = addLeadingZero(minutes);
-        seconds.textContent = addLeadingZero(seconds);
+        daysEl.textContent = addLeadingZero(days);
+        hoursEl.textContent = addLeadingZero(hours);
+        minutesEl.textContent = addLeadingZero(minutes);
+        secondsEl.textContent = addLeadingZero(seconds);
 
         if (timeToEnd < 1000) {
             val.forEach(e => e.classList.toggle('end'));
