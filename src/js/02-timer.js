@@ -32,7 +32,7 @@ flatpickr(date, {
 startBtn.addEventListener('click', onStartBtn);
 
 function onStartBtn() {
-    val.forEach(e => e.classList.toggle('end'));
+    val.forEach(item => item.classList.toggle('end'));
     startBtn.disabled = true;
     date.disabled = true;
 
@@ -47,7 +47,7 @@ function onStartBtn() {
         secondsEl.textContent = addLeadingZero(seconds);
 
         if (timeToEnd < 1000) {
-            val.forEach(e => e.classList.toggle('end'));
+            val.forEach(item => item.classList.toggle('end'));
             clearInterval(timerId);
             date.disabled = false;
         }
