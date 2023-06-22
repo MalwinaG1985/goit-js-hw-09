@@ -16,3 +16,82 @@ img {
   display: block;
   max-width: 100%;
 }
+ul {
+  list-style:none;
+}
+a {
+  padding: 4px 15px;
+  border: 1px solid rgb(0, 51, 102);
+  border-radius: 5px;
+  color: rgb(0, 51, 102);
+  background-color: rgb(255, 204, 204);
+  text-decoration: none;
+  margin: 10px;
+  flex-direction: column;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 10px;
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: rgb(224, 224, 224);
+  color: rgb(204, 0, 0);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  width: 70px;
+  height: 25px;
+  color: rgb(0, 204, 0);
+  font-size: 15px;
+  border: 1px solid rgb(0, 204, 0);
+  border-radius: 8px;
+  background-color: rgb(51, 153, 255);
+  padding: 4px 15px;
+  cursor: pointer;
+}
+
+button:focus {
+  background-color: rgb(0, 204, 0);
+  box-shadow: 2px 2px 2px 1px rgba(106, 106, 109, 0.2);
+  color: rgb(51, 153, 255);
+}
+
+.timer {
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+  text-transform: uppercase;
+}
+
+.field {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 8px;
+  display: flex;
+  border: 1px solid rgb(0, 51, 102);
+  margin-top: 10px;
+  border-radius: 8px;
+  color: rgb(102, 0, 204);
+  background-color: rgb(204, 255, 255);
+
+}
+
+input {
+  border: 1px solid rgb(0, 51, 102);
+  border-radius: 5px;
+  height: 24px;
+}
+
+.value {
+  font-size: 12px;
+}
