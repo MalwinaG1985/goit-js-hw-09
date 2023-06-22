@@ -47,7 +47,7 @@ function onStartBtn() {
         seconds.textContent = addLeadingZero(seconds);
 
         if (timeToEnd < 1000) {
-            date.forEach(e => e.classList.toggle('end'));
+            val.forEach(e => e.classList.toggle('end'));
             clearInterval(timerId);
             date.disabled = false;
         }
