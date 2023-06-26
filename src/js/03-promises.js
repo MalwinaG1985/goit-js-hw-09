@@ -34,10 +34,10 @@ const submitHandler = e => {
   for (let i = 1; i <= amountInp; i++) {
     createPromise(i, delayInp)
       .then(({ position, delay }) => {
-        Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
       })
       .catch(({ position, delay }) => {
-        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
+        Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
       });
 
     delayInp += stepInp;

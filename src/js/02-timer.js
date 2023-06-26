@@ -1,5 +1,5 @@
 import flatpickr from 'flatpickr';
-import "flatpickr/dist/flatpickr.min.css";
+import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 import '../css/common.css';
 
@@ -65,7 +65,7 @@ function onStartBtn() {
         const timeToEnd = selectData - Date.now();
         const { days, hours, minutes, seconds } = convertMs(timeToEnd);
 
-        daysEl.textContent = addLeadingZero(days);
+        daysEl.textContent = days;
         hoursEl.textContent = addLeadingZero(hours);
         minutesEl.textContent = addLeadingZero(minutes);
         secondsEl.textContent = addLeadingZero(seconds);
