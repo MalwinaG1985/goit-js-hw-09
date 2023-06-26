@@ -1,6 +1,7 @@
 import Notiflix from 'notiflix';
 
 const formEl = document.querySelector('.form');
+
 let delayInp = null;
 let stepInp = null;
 let amountInp = null;
@@ -19,13 +20,13 @@ function createPromise(position, delay) {
   });
 }
 
-const submitHandler = e => {
-  e.preventDefault();
-  if (!e.target.tagName === 'BUTTON') return;
+const submitHandler = event => {
+  event.preventDefault();
+  if (!event.target.tagName === 'BUTTON') return;
 
   const {
     elements: { delay, step, amount },
-  } = e.currentTarget;
+  } = event.currentTarget;
 
   delayInp = Number(delay.value);
   stepInp = Number(step.value);
@@ -43,6 +44,6 @@ const submitHandler = e => {
     delayInp += stepInp;
   }
 
-  e.currentTarget.reset();
+  event.currentTarget.reset();
 };
 formEl.addEventListener('submit', submitHandler);
