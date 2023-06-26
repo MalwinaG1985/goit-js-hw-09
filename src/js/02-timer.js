@@ -3,56 +3,16 @@ import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
 import '../css/common.css';
 
-const date = document.querySelector('#datetime-picker');
+// const date = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
 const daysEl = document.querySelector('[data-days]');
 const hoursEl = document.querySelector('[data-hours]');
 const minutesEl = document.querySelector('[data-minutes]');
 const secondsEl = document.querySelector('[data-seconds]');
-const val = document.querySelector('.value');
+// const val = document.querySelector('.value');
 
 let timerId = null;
 startBtn.setAttribute('disabled', true);
-
-flatpickr(date, {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-    onClose(selectedDates) {
-        if (selectedDates[0] <= Date.now()) {
-            Notiflix.Notify.failure('Please choose a date in the future');
-            return;
-        } else {
-         startBtn.removeAttribute('disabled');
-        }
-  },
-});
-
-startBtn.addEventListener('click', onStartBtn);
-
-function onStartBtn() {
-    val.forEach(item => item.classList.toggle('end'));
-    startBtn.disabled = true;
-    date.disabled = true;
-
-    timerId = setInterval(() => {
-        const selectData = new Date(date.value);
-        const timeToEnd = selectData - Date.now();
-        const { days, hours, minutes, seconds } = convertMs(timeToEnd);
-
-        daysEl.textContent = addLeadingZero(days);
-        hoursEl.textContent = addLeadingZero(hours);
-        minutesEl.textContent = addLeadingZero(minutes);
-        secondsEl.textContent = addLeadingZero(seconds);
-
-        if (timeToEnd < 1000) {
-            val.forEach(item => item.classList.toggle('end'));
-            clearInterval(timerId);
-            date.disabled = false;
-        }
-    }, 1000);
-}
 
 function convertMs(ms) {
 // Number of milliseconds per unit of time
@@ -74,6 +34,98 @@ function convertMs(ms) {
 }
 
 
+
 function addLeadingZero(value) {
     return `${value}`.padStart(2, '0');
 }
+
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    if (selectedDates[0] < new Date()) {
+      Notiflix.Notify.failure('Please choose a date in the future');
+      return;
+    }
+    startBtn.removeAttribute('disabled');
+
+    const showTimer = () => {
+      const now = new Date();
+      localStorage.setItem('selectedData', selectedDates[0]);
+      const selectData = new Date(localStorage.getItem('selectedData'));
+
+      if (!selectData) return;
+
+      const timeToEnd = selectData - now;
+      const { days, hours, minutes, seconds } = convertMs(timeToEnd);
+      daysEl.textContent = days;
+      hoursEl.textContent = addLeadingZero(hours);
+      minutesEl.textContent = addLeadingZero(minutes);
+      secondsEl.textContent = addLeadingZero(seconds);
+
+      if (
+        daysEl.textContent === '0' &&
+        hoursEl.textContent === '00' &&
+        minutesEl.textContent === '00' &&
+        secondsEl.textContent === '00'
+      ) {
+        clearInterval(timerId);
+      }
+    };
+
+    const onClick = () => {
+      if (timerId) {
+        clearInterval(timerId);
+      }
+      showTimer();
+      timerId = setInterval(showTimer, 1000);
+    };
+
+    startBtn.addEventListener('click', onClick);
+  },
+};
+
+flatpickr('#datetime-picker', { ...options });
+
+// flatpickr(date, {
+//   enableTime: true,
+//   time_24hr: true,
+//   defaultDate: new Date(),
+//   minuteIncrement: 1,
+//     onClose(selectedDates) {
+//         if (selectedDates[0] <= Date.now()) {
+//             Notiflix.Notify.failure('Please choose a date in the future');
+//             return;
+//         } else {
+//          startBtn.removeAttribute('disabled');
+//         }
+//   },
+// });
+
+// startBtn.addEventListener('click', onStartBtn);
+
+// function onStartBtn() {
+//     val.forEach(item => item.classList.toggle('end'));
+//     startBtn.disabled = true;
+//     date.disabled = true;
+
+//     timerId = setInterval(() => {
+//         const selectData = new Date(date.value);
+//         const timeToEnd = selectData - Date.now();
+//         const { days, hours, minutes, seconds } = convertMs(timeToEnd);
+
+//         daysEl.textContent = addLeadingZero(days);
+//         hoursEl.textContent = addLeadingZero(hours);
+//         minutesEl.textContent = addLeadingZero(minutes);
+//         secondsEl.textContent = addLeadingZero(seconds);
+
+//         if (timeToEnd < 1000) {
+//             val.forEach(item => item.classList.toggle('end'));
+//             clearInterval(timerId);
+//             date.disabled = false;
+//         }
+//     }, 1000);
+// }
+
