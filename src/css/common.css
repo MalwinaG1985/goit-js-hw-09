@@ -95,3 +95,7 @@ input {
 .value {
   font-size: 12px;
 }
+.size {
+font-size: 10px;
+padding:0;
+}
